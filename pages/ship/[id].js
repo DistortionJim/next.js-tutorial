@@ -46,6 +46,7 @@ export default function Ship({ship}) {
                     </tr>
                 </tbody>
             </Table>
+
             <button className="btn btn-primary" onClick={() => Router.push('/ships')}>All ships</button>
 
         </MainLayout>
@@ -59,4 +60,4 @@ Ship.getInitialProps = async (ctx) => {
     return {
         ship
     }
-}
+};

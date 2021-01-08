@@ -3,13 +3,14 @@ import Image from 'next/image';
 
 import {Nav} from 'react-bootstrap';
 import { useRouter } from 'next/router';
-
 import Head from 'next/head'
 
 
 
 export function MainLayout({children, title}) {
     const router = useRouter();
+
+    console.log('router', router);
 
     return (
         <>
@@ -41,10 +42,13 @@ export function MainLayout({children, title}) {
                         <Link href="/about"><a className={router.pathname == "/about" ? "active nav-link" : "nav-link"}>About</a></Link>
                     </Nav.Item>
                     <Nav.Item as="li">
-                        <Link href="/ships"><a className={router.pathname == "/ships" ? "active nav-link" : "nav-link"}>Starships</a></Link>
+                        <Link href="/ships"><a className={router.pathname == "/ships" || router.pathname == "/ship/[id]" ? "active nav-link" : "nav-link"}>Starships</a></Link>
                     </Nav.Item>
                     <Nav.Item as="li">
-                        <Link href="/planets"><a className={router.pathname == "/planets" ? "active nav-link" : "nav-link"}>Planets</a></Link>
+                        <Link href="/planets"><a className={router.pathname == "/planets" || router.pathname == "/planet/[id]" ? "active nav-link" : "nav-link"}>Planets</a></Link>
+                    </Nav.Item>
+                    <Nav.Item as="li">
+                        <Link href="/species"><a className={router.pathname == "/species" || router.pathname == "/specie/[id]" ? "active nav-link" : "nav-link"}>Species</a></Link>
                     </Nav.Item>
                 </Nav>
 

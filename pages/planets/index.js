@@ -1,13 +1,27 @@
-import {useState, useEffect} from 'react';
-
-import {MainLayout} from "../components/MainLayout";
-import {Loader} from "../components/Loader";
+import {MainLayout} from "../../components/MainLayout";
+import {Loader} from "../../components/Loader/index";
 import Router from "next/router";
 import Link from "next/link";
 
+// import useSWR from 'swr'
 import {Row, Col, Card, ListGroup, ListGroupItem, Breadcrumb} from 'react-bootstrap';
+import {useEffect, useState} from "react";
 
 export default function Planets ({planets: serverData}) {
+
+    // const fetcher = url => fetch(url).then(r => r.json());
+    //
+    // const { data, error } = useSWR('https://swapi.dev/api/planets/', fetcher, { initialData: planets });
+    //
+    // if (!data) {
+    //     return (
+    //         <MainLayout>
+    //             <Loader />
+    //         </MainLayout>
+    //     );
+    // }
+
+    // if (error) return <div>failed to load</div>;
 
     const [planets, setPlanets] = useState(serverData);
 
@@ -15,8 +29,7 @@ export default function Planets ({planets: serverData}) {
         async function load() {
             const res = await fetch('https://swapi.dev/api/planets/');
             const data = await res.json();
-
-            setPlanets(data.results);
+            setPlanets(data);
 
         }
         if(!serverData) {
@@ -35,7 +48,7 @@ export default function Planets ({planets: serverData}) {
 
 
     return (
-        <MainLayout title="Planets">
+        <MainLayout title="Index">
             <Breadcrumb>
                 <li className="breadcrumb-item">
                     <Link href="/"><a>Home</a></Link>
@@ -45,7 +58,7 @@ export default function Planets ({planets: serverData}) {
             <h1>Planets</h1>
             <Row className={'my-4'}>
                 {
-                    planets.map((planet, index) => (
+                    planets.results.map((planet, index) => (
                         <Col  xs="12" sm="6" md="4" lg="3" className={'mb-4'} key={index}>
                             <Card>
                                 <Card.Body>
@@ -75,36 +88,29 @@ export default function Planets ({planets: serverData}) {
     )
 }
 
-// Planets.getInitialProps = async ({req}) => {
-//     if (!req) {
-//         console.log('Front request');
-//         return {
-//             planets: null
-//         }
-//     }
+
+
+// export async function getServerSideProps() {
 //     const res = await fetch('https://swapi.dev/api/planets/');
 //     const planets = await res.json();
-//     console.log('Back request');
+//     console.log('Backend request');
 //     return {
-//         planets: planets.results
+//         props: {planets}
 //     }
-//
-// };
+// }
 
-export async function getServerSideProps({req}) {
-    console.log('----req-----', req);
+Planets.getInitialProps = async ({req}) => {
     if (!req) {
         console.log('Front request');
         return {
-            planets: null
+            planet: null
         }
     }
+
     const res = await fetch('https://swapi.dev/api/planets/');
     const planets = await res.json();
     console.log('Back request');
     return {
-        props: {
-            planets: planets.results
-        }
+        planets
     }
-}
+};

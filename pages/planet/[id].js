@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 
 import {MainLayout} from "../../components/MainLayout";
-import {Loader} from "../../components/Loader";
+import {Loader} from "../../components/Loader/index";
 
 import {Table, Breadcrumb} from 'react-bootstrap';
 import Router from "next/router";
@@ -82,7 +82,7 @@ export default function Planet({planet: serverData}) {
 
 Planet.getInitialProps = async ({query, req}) => {
     if (!req) {
-        console.log('Front request')
+        console.log('Front request');
         return {
             planet: null
         }
@@ -96,11 +96,3 @@ Planet.getInitialProps = async ({query, req}) => {
     }
 };
 
-// export async function getServerSideProps({query, req}) {
-//
-//     const res = await fetch('https://swapi.dev/api/planets/' + query.id);
-//     const planet = await res.json();
-//     return {
-//         props: {planet}
-//     }
-// }

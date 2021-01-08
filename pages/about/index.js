@@ -1,17 +1,17 @@
 import Router from "next/router";
-import {MainLayout} from "../components/MainLayout";
+import {MainLayout} from "../../components/MainLayout";
 
 import {Breadcrumb} from 'react-bootstrap';
 import Link from "next/link";
 
-export default function About () {
+export default function Index () {
  return (
-     <MainLayout  title="About">
+     <MainLayout  title="Index">
          <Breadcrumb>
              <li className="breadcrumb-item">
                  <Link href="/"><a>Home</a></Link>
              </li>
-             <Breadcrumb.Item active>About</Breadcrumb.Item>
+             <Breadcrumb.Item active>Index</Breadcrumb.Item>
          </Breadcrumb>
           <h1>What is this?</h1>
           <p>The Star Wars API is the world's first quantified and programmatically-formatted set of Star Wars data.</p>
@@ -21,3 +21,4 @@ export default function About () {
      </MainLayout>
  )
 }
+

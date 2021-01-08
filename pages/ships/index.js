@@ -1,11 +1,11 @@
-import {MainLayout} from "../components/MainLayout";
+import {MainLayout} from "../../components/MainLayout";
 import Router from "next/router";
 import Link from "next/link";
 
 import {Row, Col, Card, ListGroup, ListGroupItem, Breadcrumb} from 'react-bootstrap';
 // import {useState, useEffect} from "react";
 
-export default function Ships ({ships}) {
+export default function Index ({ships}) {
 
     // const [ships, setShips] = useState({});
 
@@ -20,7 +20,7 @@ export default function Ships ({ships}) {
     // }, []);
 
     return (
-        <MainLayout title="Ships">
+        <MainLayout title="Index">
             <Breadcrumb>
                 <li className="breadcrumb-item">
                     <Link href="/"><a>Home</a></Link>
@@ -57,7 +57,7 @@ export default function Ships ({ships}) {
     )
 }
 
-Ships.getInitialProps = async () => {
+Index.getInitialProps = async () => {
     const res = await fetch('https://swapi.dev/api/starships/');
     const ships = await res.json();
     return {
